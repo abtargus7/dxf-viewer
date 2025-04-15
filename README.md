@@ -156,6 +156,69 @@ The file table has a one-to-many relationship with the block table, where each f
 
 The block table has a one-to-many relationship with the entity table, where each block can contain multiple entities.
 
+
+## 🔧 Most Important: Database Migration Steps
+
+To set up the database using Sequelize, follow these steps carefully:
+
+### 1. **Install Sequelize CLI and Required Packages**
+Make sure you have Sequelize CLI, Sequelize, and PostgreSQL driver installed.
+
+* Install Sequelize
+    ```bash
+    npm install --save sequelize sequelize-cli pg pg-hstore
+    ```
+* Initialize Sequelize
+    ```bash
+    npx sequelize-cli init
+    ```
+This will create the following folders:
+
+```
+config/
+models/
+migrations/
+seeders/
+```
+3. Configure ```config/config.js```
+Update ```config/config.js``` (or if using ```.js``` config file) with your PostgreSQL database credentials:
+
+```
+development: {
+  username: "your_username",
+  password: "your_password",
+  database: "your_database_name",
+  host: "127.0.0.1",
+  dialect: "postgres"
+}
+```
+
+4. Create Models and Migrations
+Create your models with migration files:
+
+```bash
+npx sequelize-cli model:generate --name file --attributes fileName:string,fileType:string,size:integer,path:string
+npx sequelize-cli model:generate --name block --attributes name:string,positionX:float,positionY:float,positionZ:float,handle:string,ownerHandle:string,name2:string,xrefPath:string,fileId:uuid
+npx sequelize-cli model:generate --name entity --attributes blockId:uuid,type:string,coOrdinates:jsonb,handle:string,ownerHandle:string,color:integer,colorIndex:integer,shape:boolean,normalVector:jsonb,degreeOfSplineCurve:integer
+```
+Then update the migration files (if needed) to include relationships (foreign keys).
+
+5. Run Migrations
+After updating your models and migrations, execute the following command to create tables in your PostgreSQL database:
+
+```bash
+npx sequelize-cli db:migrate
+```
+
+6. Undo Migrations (Optional)
+If needed, you can undo the last migration or all of them:
+```bash
+npx sequelize-cli db:migrate:undo       # Undo last migration
+npx sequelize-cli db:migrate:undo:all   # Undo all migrations
+```
+
+Make sure you have a running PostgreSQL instance and your ```.env``` or config is set correctly before running migrations. This setup is essential for syncing your Sequelize models with the actual database schema.
+
 ### Reasoning Behind Library Choices
 
 * Frontend: React was chosen for its component-based architecture and extensive ecosystem, making it a great choice for building dynamic and scalable UIs.
@@ -182,6 +245,18 @@ The block table has a one-to-many relationship with the entity table, where each
 
 5. **Learning Sequelize and PostgreSQL:**
    Another challenge was getting familiar with Sequelize and PostgreSQL. I had to understand how Sequelize ORM works and how to set up models, relationships, and migrations in the context of PostgreSQL. Learning the nuances of PostgreSQL, like how to define data types, handle migrations, and structure queries efficiently, was essential for ensuring smooth data operations in the project.
+
+
+### How I Used AI Coding Assistants in My Development Process
+During the development process, I leveraged AI coding assistants (like ChatGPT) in the following ways:
+
+* Code Suggestions: Whenever I faced challenges in implementing complex logic or needed syntax examples, I used the assistant to provide code suggestions and explanations.
+
+* Debugging: I used AI assistants to troubleshoot and debug errors, especially for issues related to Node.js, React, and database queries.
+
+* Best Practices: I consulted AI tools for advice on best practices, such as how to structure code efficiently, follow clean code principles, and optimize database queries.
+
+* Learning Resources: The assistant provided links to relevant documentation, tutorials, and articles when I was exploring new libraries or frameworks.
 
 🎯 Features
 * Upload .dxf files and parse blocks/entities
