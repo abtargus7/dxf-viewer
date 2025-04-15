@@ -40,3 +40,10 @@ cd dxf-viewer
 ```
 
 🔧 1. Setup Backend
+
+```bash
+cd backend
+npm install
+```
+
+Create  ```.env``` file in ```/backend```:
