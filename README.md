@@ -25,7 +25,10 @@ A full-stack application to upload DXF (Drawing Exchange Format) files, extract 
 
 ## 📁 Project Structure
 
-dxf-viewer/ ├── frontend/ # React app with file upload, entity view, pagination ├── backend/ # Express API with DXF parsing and PostgreSQL integration └── README.md # You're here!
+dxf-viewer/ 
+├── frontend/ # React app with file upload, entity view, pagination 
+├── backend/ # Express API with DXF parsing and PostgreSQL integration 
+└── README.md # You're here!
 
 
 ---
