@@ -36,6 +36,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/dxf-viewer.git
-cd dxf-viewer ```
+cd dxf-viewer 
+```
 
 🔧 1. Setup Backend
